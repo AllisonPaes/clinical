@@ -1,0 +1,60 @@
+
+{%load static%}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Procedimentos</h4>
+        <p class="card-category"> Lista de todos os procedimentos</p>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Nome</th>
+              <th>Descrição</th>
+              <th>Preço</th>
+              <th>Ações</th>
+            </thead>
+            <tbody>
+              {% for procedimento in procedimentos %}
+              <tr>
+                <td>{{ procedimento.nome }}</td>
+                <td>{{ procedimento.descricao }}</td>
+                <td>{{ procedimento.preco }}</td>
+                <td>
+                  <a href="{% url 'procedimento_edit' procedimento.id %}" class="btn btn-warning">Editar</a>
+                  <button class="btn btn-danger" onclick="deleteProcedimento(procedimento.id)">Excluir</button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <a href="{% url 'procedimento_create' %}" class="btn btn-primary">Adicionar Procedimento</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function deleteProcedimento(procedimentoId) {
+    if (confirm('Tem certeza que deseja excluir este procedimento?')) {
+      $.ajax({
+        url: `{% url 'procedimento_delete' 0 %}`.replace(0, procedimentoId),
+        type: 'DELETE',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+        success: function () {
+          location.reload();
+        },
+        error: function (xhr) {
+          alert('Erro ao excluir procedimento: ' + xhr.responseText);
+        }
+      });
+    }
+  }
+</script>
+{% endblock %}

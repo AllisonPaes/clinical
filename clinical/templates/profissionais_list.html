@@ -1,0 +1,61 @@
+{%load static%}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Profissionais</h4>
+        <p class="card-category"> Lista de todos os profissionais</p>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Nome</th>
+              <th>Especialidade</th>
+              <th>CRM</th>
+              <th>Email</th>
+              <th>Ações</th>
+            </thead>
+            <tbody>
+              {% for profissional in profissionais %}
+              <tr>
+                <td>{{ profissional.nome }}</td>
+                <td>{{ profissional.especialidade }}</td>
+                <td>{{ profissional.crm }}</td>
+                <td>{{ profissional.email }}</td>
+                <td>
+                  <a href="{% url 'profissional_edit' profissional.id %}" class="btn btn-warning">Editar</a>
+                  <button class="btn btn-danger" onclick="deleteProfissional(profissional.id)">Excluir</button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <a href="{% url 'profissional_create' %}" class="btn btn-primary">Adicionar Profissional</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function deleteProfissional(profissionalId) {
+    if (confirm('Tem certeza que deseja excluir este profissional?')) {
+      $.ajax({
+        url: `{% url 'profissional_delete' 0 %}`.replace(0, profissionalId),
+        type: 'DELETE',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+        success: function () {
+          location.reload();
+        },
+        error: function (xhr) {
+          alert('Erro ao excluir profissional: ' + xhr.responseText);
+        }
+      });
+    }
+  }
+</script>
+{% endblock %}

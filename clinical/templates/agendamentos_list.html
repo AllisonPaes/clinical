@@ -1,0 +1,63 @@
+{%load static%}
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Agendamentos</h4>
+        <p class="card-category"> Lista de todos os agendamentos</p>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table">
+            <thead class=" text-primary">
+              <th>Paciente</th>
+              <th>Profissional</th>
+              <th>Procedimento</th>
+              <th>Sala</th>
+              <th>Data e Hora</th>
+              <th>Ações</th>
+            </thead>
+            <tbody>
+              {% for agendamento in agendamentos %}
+              <tr>
+                <td>{{ agendamento.paciente.nome }}</td>
+                <td>{{ agendamento.profissional.nome }}</td>
+                <td>{{ agendamento.procedimento.nome }}</td>
+                <td>{{ agendamento.sala.numero }}</td>
+                <td>{{ agendamento.data_horario }}</td>
+                <td>
+                  <a href="{% url 'agendamento_edit' agendamento.id %}" class="btn btn-warning">Editar</a>
+                  <button class="btn btn-danger" onclick="deleteAgendamento( agendamento.id )">Excluir</button>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          <a href="{% url 'agendamento_create' %}" class="btn btn-primary">Adicionar Agendamento</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function deleteAgendamento(agendamentoId) {
+    if (confirm('Tem certeza que deseja excluir este agendamento?')) {
+      $.ajax({
+        url: `{% url 'agendamento_delete' 0 %}`.replace(0, agendamentoId),
+        type: 'DELETE',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+        success: function () {
+          location.reload();
+        },
+        error: function (xhr) {
+          alert('Erro ao excluir agendamento: ' + xhr.responseText);
+        }
+      });
+    }
+  }
+</script>
+{% endblock %}

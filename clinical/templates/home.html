@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/material-dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="sidebar" data-color="purple" data-background-color="white" data-image="{% static 'img/sidebar-1.jpg' %}">
+            <div class="logo">
+                <a href="#" class="simple-text logo-normal">
+                    Clinica
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/pacientes/">
+                            <i class="material-icons">person</i>
+                            <p>Pacientes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profissionais/">
+                            <i class="material-icons">person_outline</i>
+                            <p>Profissionais</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/procedimentos/">
+                            <i class="material-icons">healing</i>
+                            <p>Procedimentos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/agendamentos/">
+                            <i class="material-icons">schedule</i>
+                            <p>Agendamentos</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/salas/">
+                            <i class="material-icons">room</i>
+                            <p>Salas</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <a class="navbar-brand" href="#">Dashboard</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                        <span class="navbar-toggler-icon icon-bar"></span>
+                    </button>
+                </div>
+            </nav>
+            <div class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-primary">
+                                    <h4 class="card-title">Bem-vindo à Clinica</h4>
+                                    <p class="card-category">Esta é a página inicial do seu site.</p>
+                                </div>
+                                <div class="card-body">
+                                    <p>Esta é a página inicial do seu site.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav class="float-left">
+                        <ul>
+                            <li>
+                                <a href="#">
+                                    Clinica
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright float-right">
+                        &copy; <script>document.write(new Date().getFullYear())</script>, feito com <i class="material-icons">favorite</i> por <a href="#" target="_blank">Clinica</a>.
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <script src="{% static 'js/core/jquery.min.js' %}"></script>
+    <script src="{% static 'js/core/popper.min.js' %}"></script>
+    <script src="{% static 'js/core/bootstrap-material-design.min.js' %}"></script>
+    <script src="{% static 'js/plugins/perfect-scrollbar.jquery.min.js' %}"></script>
+    <script src="{% static 'js/plugins/chartist.min.js' %}"></script>
+    <script src="{% static 'js/plugins/bootstrap-notify.js' %}"></script>
+    <script src="{% static 'js/material-dashboard.min.js' %}"></script>
+</body>
+
+</html>
